@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTable } from 'react-table';
 
 const PortfolioTable = () => {
-    const [selectedAccountType, setSelectedAccountType] = useState('');
-    const [portfolioData, setPortfolioData] = useState([]);
+    const [selectedAccountType, setSelectedAccountType] = useState('total');
+    const [portfolioInfo, setPortfolioInfo] = useState([]);
     const [filteredStocks, setFilteredStocks] = useState([]);
 
     useEffect(() => {
-        // Fetch data from the API endpoint
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/entrade-api/get-all-accounts-portfolio-info');
+                const response = await fetch('http://localhost:8000/entrade-api/get-all-portfolio-info');
                 const data = await response.json();
-                setPortfolioData(data.portfolioInfo);
+                setPortfolioInfo(data.portfolioInfo);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -22,9 +21,8 @@ const PortfolioTable = () => {
     }, []);
 
     useEffect(() => {
-        // Filter stocks based on the selected account type
         if (selectedAccountType) {
-            const selectedPortfolio = portfolioData.find(
+            const selectedPortfolio = portfolioInfo.find(
                 (portfolio) => portfolio.accountType === selectedAccountType
             );
 
@@ -32,9 +30,13 @@ const PortfolioTable = () => {
         } else {
             setFilteredStocks([]);
         }
-    }, [selectedAccountType, portfolioData]);
+    }, [selectedAccountType, portfolioInfo]);
 
-    const accountTypes = portfolioData.map((portfolio) => portfolio.accountType);
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    const accountTypes = portfolioInfo.map((portfolio) => portfolio.accountType);
 
     const columns = React.useMemo(
         () => [
@@ -52,12 +54,12 @@ const PortfolioTable = () => {
             },
             {
                 Header: 'Giá hòa vốn',
-                accessor: 'initialValue',
+                accessor: 'costPrice',
                 Cell: ({ value }) => new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
-                    minimumFractionDigits: 0, // Set the minimum fraction digits to 0
-                    maximumFractionDigits: 0, // Set the maximum fraction digits to 0
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
                 }).format(value),
             },
             {
@@ -66,8 +68,8 @@ const PortfolioTable = () => {
                 Cell: ({ value }) => new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
-                    minimumFractionDigits: 0, // Set the minimum fraction digits to 0
-                    maximumFractionDigits: 0, // Set the maximum fraction digits to 0
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
                 }).format(value),
             },
             {
@@ -76,8 +78,8 @@ const PortfolioTable = () => {
                 Cell: ({ value }) => new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND',
-                    minimumFractionDigits: 0, // Set the minimum fraction digits to 0
-                    maximumFractionDigits: 0, // Set the maximum fraction digits to 0
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
                 }).format(value),
             },
             // Add more columns as needed
@@ -97,27 +99,24 @@ const PortfolioTable = () => {
 
     return (
         <div className="mt-0 ml-10">
-            {/* Dropdown to select account type */}
             <select
                 value={selectedAccountType}
                 onChange={(e) => setSelectedAccountType(e.target.value)}
-                className="p-2 mb-4"
+                className="p-2 mb-4 bg-gray-800 text-white rounded-md"
             >
-                <option value="">Select Account Type</option>
                 {accountTypes.map((type) => (
                     <option key={type} value={type}>
-                        {type}
+                        {capitalizeFirstLetter(type)}
                     </option>
                 ))}
             </select>
 
-            {/* Display the table */}
-            <table {...getTableProps()} className="w-full min-w-full border border-gray-300 bg-white rounded-md overflow-hidden">
+            <table {...getTableProps()} className="w-full min-w-full border border-gray-700 bg-gray-800 text-white rounded-md overflow-hidden">
                 <thead>
                     {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} className="bg-gray-200">
+                        <tr {...headerGroup.getHeaderGroupProps()} className="bg-gray-600">
                             {headerGroup.headers.map((column) => (
-                                <th {...column.getHeaderProps()} className="p-3 font-semibold text-sm text-gray-700">
+                                <th {...column.getHeaderProps()} className="p-3 font-semibold text-sm">
                                     {column.render('Header')}
                                 </th>
                             ))}
@@ -128,9 +127,9 @@ const PortfolioTable = () => {
                     {rows.map((row) => {
                         prepareRow(row);
                         return (
-                            <tr {...row.getRowProps()} className="hover:bg-gray-100">
+                            <tr {...row.getRowProps()} className="hover:bg-gray-700">
                                 {row.cells.map((cell) => (
-                                    <td {...cell.getCellProps()} className="p-3 text-sm text-gray-800">
+                                    <td {...cell.getCellProps()} className="p-3 text-sm">
                                         {cell.render('Cell')}
                                     </td>
                                 ))}
