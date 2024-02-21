@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "firefox",
+            "type": "msedge",
             "request": "launch",
             "name": "Debug Miquants",
             "url": "http://localhost:3000",
