@@ -5,7 +5,7 @@ export default function DashboardStatsGrid() {
 
   useEffect(() => {
     // Fetch money information
-    fetch('http://localhost:8000/entrade-api/get-all-money-info')
+    fetch('https://mqdashboard-api.onrender.com/entrade-api/get-all-money-info')
       .then((response) => response.json())
       .then((data) => setMoneyInfo(data.moneyInfo))
       .catch((error) => console.error('Error fetching money information:', error));

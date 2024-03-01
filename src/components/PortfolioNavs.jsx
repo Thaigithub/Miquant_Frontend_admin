@@ -16,7 +16,7 @@ const PortfolioNavs = () => {
                 const formattedCurrentDate = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
 
                 // Make the fetch request with the dynamically generated toDate value
-                const response = await fetch(`http://localhost:8000/entrade-api/get-all-navs-info?fromDate=02-04-2023&toDate=${formattedCurrentDate}`);
+                const response = await fetch(`https://mqdashboard-api.onrender.com/entrade-api/get-all-navs-info?fromDate=02-04-2023&toDate=${formattedCurrentDate}`);
                 const data = await response.json();
                 setNavInfo(data);
             } catch (error) {

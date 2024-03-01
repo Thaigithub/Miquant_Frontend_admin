@@ -9,7 +9,7 @@ const PortfolioTable = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8000/entrade-api/get-all-portfolio-info');
+                const response = await fetch('https://mqdashboard-api.onrender.com/entrade-api/get-all-portfolio-info');
                 const data = await response.json();
                 setPortfolioInfo(data.portfolioInfo);
             } catch (error) {
