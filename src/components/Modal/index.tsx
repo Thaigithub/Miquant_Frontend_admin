@@ -5,8 +5,8 @@ export default function ModalCustom({
   handleOk,
   handleCancel,
   content,
-  btnOkText = '확인', // CONFIRMATION,
-  btnCancelText = '취소', // CANCELLATION
+  btnOkText = 'CONFIRM', // CONFIRMATION,
+  btnCancelText = 'CANCEL', // CANCELLATION
   isLoadingOkBtn,
 }: {
   isModalOpen: boolean;

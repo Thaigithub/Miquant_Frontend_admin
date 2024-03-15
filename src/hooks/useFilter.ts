@@ -2,7 +2,7 @@ import { ReadonlyURLSearchParams, usePathname, useRouter, useSearchParams } from
 import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { PagingREQ, initialPagingState } from '../redux/paging.type';
-import { removeEmptyParams } from '../utils/helpers/params.helpers';
+import { removeEmptyParams } from '@/utils/helpers/params.helpers';
 type PagingFiletrType<T> = {
   initialPaging?: PagingREQ;
   initialFilter?: T;

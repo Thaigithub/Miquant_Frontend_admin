@@ -152,7 +152,7 @@ export default function MainHeader({ collapsed, setCollapsed }: MainHeaderProps)
         isModalOpen={modalConfirm}
         handleCancel={handleCloseModalConfirm}
         handleOk={handleOkModalConfirm}
-        content='비밀번호를 변경하시겠습니까?'
+        content='Would you like to change your password?'
       />
     </Header>
   );

@@ -1,4 +1,4 @@
-import { ContentTypeEnum } from '../utils/enums/contentTypeEnum';
+import { ContentTypeEnum } from '@/utils/enums/files';
 
 export type FileResponse = {
   fileName: string;

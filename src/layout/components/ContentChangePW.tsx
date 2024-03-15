@@ -12,11 +12,11 @@ export default function ContentChangePW({ form, onFinish }: Props) {
 
   return (
     <div className='flex flex-col'>
-      <span className='text-[16px] font-medium self-center mb-8'>비밀번호 변경</span>
+      <span className='text-[16px] font-medium self-center mb-8'>CHANGE PASSWORD</span>
       <Form form={form} onFinish={onFinish}>
         <div className='flex items-center gap-12 w-full mb-4'>
           <span className='text-[15px]  font-medium text-gray-06 flex gap-8 w-24 my-auto'>
-            새 비밀번호 {/*New Password*/}
+            New Password
           </span>
 
           <div className='flex w-[180px] md:!w-[280px]'>
@@ -45,7 +45,7 @@ export default function ContentChangePW({ form, onFinish }: Props) {
 
         <div className='flex items-center gap-12 w-full'>
           <span className='text-[15px]  font-medium text-gray-06 flex gap-8 w-24 my-auto'>
-            비밀번호 확인 {/*verify password*/}
+            Verify Password
           </span>
 
           <div className='flex w-[180px] md:!w-[280px]'>
