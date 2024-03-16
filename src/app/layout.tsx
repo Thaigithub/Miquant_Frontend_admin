@@ -1,5 +1,4 @@
 'use client';
-
 import StyledComponentsRegistry from '@/provider/AntdRegistry';
 import './globals.scss';
 import NextAuthProvider from '@/provider/NextauthProvider';

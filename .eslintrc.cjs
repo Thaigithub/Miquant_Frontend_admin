@@ -39,7 +39,6 @@ module.exports = {
     'block-spacing': ['warn', 'always'],
     'comma-spacing': ['warn', { before: false, after: true }],
     'eol-last': ['warn', 'always'],
-
     'jsx-a11y/alt-text': [0],
     'jsx-a11y/no-autofocus': [0],
     // Note: you must disable the base rule as it can report incorrect errors

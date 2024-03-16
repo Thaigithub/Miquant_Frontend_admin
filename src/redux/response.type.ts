@@ -12,8 +12,10 @@ export type ListResponse<T> = {
   };
   error: boolean;
 };
-
 export type ListResponseData<T> = {
-  data: T[];
-  total: number;
+  error: boolean;
+  data: {
+    data: T[];
+    total: number;
+  };
 };

@@ -10,11 +10,11 @@ export const rtkQueryErrorLogger: Middleware = (api: MiddlewareAPI) => (next) =>
   if (isRejectedWithValue(action)) {
     if (action?.payload?.status !== 401) {
       notification.error({
-        message: '오류', // Error
+        message: 'Error',
         description:
           action?.payload?.data?.message && action.payload.data.message in ErrorEnum
             ? ErrorEnum[action.payload.data.message as keyof typeof ErrorEnum]
-            : '에러 발생됨.', // An error occurred.
+            : 'An error occurred',
       });
     }
   }

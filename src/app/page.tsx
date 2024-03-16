@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 import MainLayout from '@/layout';
-import DashboardContent from './(dashboard)/components/DashboardContent';
+import DashboardContent from './(admin)/(dashboard)/components/DashboardContent';
 
 export default function Dashboard() {
   return (
