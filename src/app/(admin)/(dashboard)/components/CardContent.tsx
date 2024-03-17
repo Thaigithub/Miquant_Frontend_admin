@@ -1,4 +1,4 @@
-import LoadingDots from '@/components/LoadingDot/LoadingDots';
+// import LoadingDots from '@/components/LoadingDot/LoadingDots';
 
 type CardContentProps = {
   cardFields: () => { title: string; key: string }[];
@@ -22,7 +22,7 @@ export function CardContent({ cardFields, cardData, isLoading }: CardContentProp
 
           {isLoading && (
             <span className='text-[15px] font-normal text-gray-13 w-[300px] my-auto truncate flex justify-end'>
-              <LoadingDots />
+              {/* <LoadingDots /> */}
             </span>
           )}
         </div>

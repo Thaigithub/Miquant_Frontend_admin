@@ -11,15 +11,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang='en'>
       <body className={pretendard.className}>
-        <NextAuthProvider>
-          <StyledComponentsRegistry>
-            <AntdConfigProvider>
-              <NextAuthProvider>
-                <ReduxProvider>{children}</ReduxProvider>
-              </NextAuthProvider>
-            </AntdConfigProvider>
-          </StyledComponentsRegistry>
-        </NextAuthProvider>
+        {/* <NextAuthProvider> */}
+        <StyledComponentsRegistry>
+          <AntdConfigProvider>
+            <ReduxProvider>{children}</ReduxProvider>
+          </AntdConfigProvider>
+        </StyledComponentsRegistry>
+        {/* </NextAuthProvider> */}
         <HandleOnComplete />
       </body>
     </html>

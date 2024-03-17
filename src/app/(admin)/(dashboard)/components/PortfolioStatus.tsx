@@ -3,6 +3,7 @@ import { useGetInfoDashboardQuery } from '@/redux/apis/dashboard/dashboard.api';
 import MoneyParser from '@/utils/parsers/money.parser';
 import { Col, Row } from 'antd';
 import { CardContent } from './CardContent';
+import { DashboardResponse } from '@/redux/apis/dashboard/dashboard.response';
 
 const fields = () => [
   {
@@ -34,50 +35,41 @@ const fields = () => [
     key: 'orderSecured',
   },
 ];
-const dataPortfolioStatus = (
-  netAsset: number,
-  stockValue: number,
-  totalDebt: number,
-  totalCash: number,
-  availableCash: number,
-  receivingAmount: number,
-  orderSecured: number,
-) => {
+const dataPortfolioStatus = (data: DashboardResponse) => {
   return {
-    netAsset: `${MoneyParser(netAsset)} VND`,
-    stockValue: `${MoneyParser(stockValue)} VND`,
-    totalDebt: `${MoneyParser(totalDebt)} VND`,
-    totalCash: `${MoneyParser(totalCash)} VND`,
-    availableCash: `${MoneyParser(availableCash)} VND`,
-    receivingAmount: `${MoneyParser(receivingAmount)} VND`,
-    orderSecured: `${MoneyParser(orderSecured)} VND`,
+    netAsset: `${MoneyParser(data.moneyInfo.netAssetValue)} VND`,
+    stockValue: `${MoneyParser(data.moneyInfo.stockValue)} VND`,
+    totalDebt: `${MoneyParser(data.moneyInfo.totalDebt)} VND`,
+    totalCash: `${MoneyParser(data.moneyInfo.totalCash)} VND`,
+    availableCash: `${MoneyParser(data.moneyInfo.availableCash)} VND`,
+    receivingAmount: `${MoneyParser(data.moneyInfo.receivingAmount)} VND`,
+    orderSecured: `${MoneyParser(data.moneyInfo.orderSecured)} VND`,
   };
 };
-class Response {
-  
-}
+
 export default function PortfolioStatus() {
   const { data: data, isFetching: isFetching } = useGetInfoDashboardQuery(
     'entrade-api/get-all-money-info',
   );
   return (
     <Row gutter={[8, 8]}>
-      {data.moneyInfo.map((account: any) => {
-        return (
-          <Col key={account.moneyInfo.investorAccountId}>
-            <CardInfo
-              cardTitle={account.accountType}
-              cardContent={
-                <CardContent
-                  cardFields={fields}
-                  cardData={dataPortfolioStatus(account)}
-                  isLoading={isFetching}
-                />
-              }
-            />
-          </Col>
-        );
-      })}
+      {data &&
+        data.map((account: DashboardResponse) => {
+          return (
+            <Col key={account.moneyInfo.investorAccountId}>
+              <CardInfo
+                cardTitle={account.accountType}
+                cardContent={
+                  <CardContent
+                    cardFields={fields}
+                    cardData={dataPortfolioStatus(account)}
+                    isLoading={isFetching}
+                  />
+                }
+              />
+            </Col>
+          );
+        })}
     </Row>
   );
 }
